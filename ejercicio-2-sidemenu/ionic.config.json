@@ -1,0 +1,7 @@
+{
+  "name": "ejercicio-2-sidemenu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
