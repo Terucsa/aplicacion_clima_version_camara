@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>MOVIL 2 - UMES - Actividades</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Listado de actividades</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <app-actividad *ngFor="let actividad of actividades" [actividad]="actividad"></app-actividad>
+  </ion-list>
+
+  <ion-list>
+    @for (actividad of actividades; track actividad) {
+      <app-actividad [actividad]="actividad"></app-actividad>
+    }
+  </ion-list>
+</ion-content>

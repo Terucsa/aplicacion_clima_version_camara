@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Actividad 1",
+    "estado": "Pendiente"
+  },
+  {
+    "nombre": "Actividad 2",
+    "estado": "Finalizada"
+  },
+  {
+    "nombre": "Actividad 3",
+    "estado": "Pendiente"
+  }
+]
