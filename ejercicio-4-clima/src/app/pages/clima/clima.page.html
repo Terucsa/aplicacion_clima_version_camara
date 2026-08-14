@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Clima actual</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <main class="contenedor">
+    <h1>Consulta el clima</h1>
+
+    <p>
+      Selecciona un país. La consulta utilizará las
+      coordenadas de su ciudad capital.
+    </p>
+
+    <ion-item>
+      <ion-select
+        label="País"
+        label-placement="stacked"
+        placeholder="Seleccione un país"
+        interface="popover"
+        [(ngModel)]="paisSeleccionado"
+        (ionChange)="consultarClima()"
+      >
+        <ion-select-option
+          *ngFor="let pais of paises"
+          [value]="pais"
+        >
+          {{ pais.nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div
+      class="estado"
+      *ngIf="cargando"
+    >
+      <ion-spinner
+        name="crescent"
+        aria-label="Consultando clima"
+      >
+      </ion-spinner>
+
+      <p>Consultando clima...</p>
+    </div>
+
+    <ion-text
+      color="danger"
+      *ngIf="mensajeError"
+    >
+      <p class="estado">{{ mensajeError }}</p>
+    </ion-text>
+
+    <app-tarjeta-clima
+      *ngIf="clima as climaActual"
+      [clima]="climaActual"
+    >
+    </app-tarjeta-clima>
+  </main>
+</ion-content>
