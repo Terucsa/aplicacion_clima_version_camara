@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>registroClima</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registrar Clima</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-select label="Seleccionaste"
+                  placeholder="Tipo Clima"
+                  (ionChange)="onTipoClima($event)"
+      >
+        <ion-select-option value="Soleado">Soleado</ion-select-option>
+        <ion-select-option value="Nublado">Nublada</ion-select-option>
+        <ion-select-option value="Lluviosa">Lluviosa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-label>Comentarios</ion-label>
+  <ion-textarea placeholder="Agregar Comentario" (ionChange)="onComentario($event)"></ion-textarea>
+
+  <ion-button expand="block" (click)="onAgregarFoto()">Agregar Foto</ion-button>
+  <ion-button expand="block" (click)="onEnviarInfo()">Enviar</ion-button>
+</ion-content>
