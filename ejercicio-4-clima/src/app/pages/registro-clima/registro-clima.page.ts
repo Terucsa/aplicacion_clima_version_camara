@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonTextarea, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'; 
 
 @Component({
   selector: 'app-registro-clima',
@@ -25,10 +26,28 @@ export class RegistroClimaPage implements OnInit {
   onComentario(event: any) {
     this.comentarioClima = event.target.value;
   }
-  onAgregarFoto(){
-    this.foto = "Dentro de la foto";
+  async onAgregarFoto(){
+    try {
+    // 1. Intentamos abrir la cámara y esperamos la foto 📷
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera 
+    });
+
+    if (image.webPath) {
+      this.foto = image.webPath;
+      console.log('Hola mundo')
+      console.log(this.foto)
+    }
+  } catch (error) {
+    console.log('El usuario canceló la foto o hubo un error:', error);
+  }
   }
   onEnviarInfo(){
-    console.log("Dentro de enviar informacion");
+    console.log(this.comentarioClima);
+    console.log(this.tipoClima);
+    console.log(this.foto);
   }
 }
