@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonTextarea, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'; 
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import {RegistroClimaModel} from "../../model/registro-cima.model";
+import {RegistroClimaService} from "../../services/registro-clima-service";
 
 @Component({
   selector: 'app-registro-clima',
@@ -17,7 +19,7 @@ export class RegistroClimaPage implements OnInit {
   comentarioClima: string = "";
   tipoClima: string = "";
   foto: string = "";
-  constructor() { }
+  constructor(private registroClimaService: RegistroClimaService,) { }
   ngOnInit() {
   }
   onTipoClima(event: any) {
@@ -33,21 +35,27 @@ export class RegistroClimaPage implements OnInit {
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
-      source: CameraSource.Camera 
+      source: CameraSource.Camera
     });
 
     if (image.webPath) {
       this.foto = image.webPath;
-      console.log('Hola mundo')
-      console.log(this.foto)
     }
+
+    this.foto = "Solo para mandar un registro"
   } catch (error) {
     console.log('El usuario canceló la foto o hubo un error:', error);
   }
   }
   onEnviarInfo(){
-    console.log(this.comentarioClima);
-    console.log(this.tipoClima);
-    console.log(this.foto);
+    const nuevoClima: RegistroClimaModel = {
+      id: 1232123,
+      comentario: this.comentarioClima,
+      tipoClima: this.tipoClima,
+      foto: this.foto
+    };
+
+    let respuesta = this.registroClimaService.insertClima(nuevoClima);
+    console.log(respuesta)
   }
 }
